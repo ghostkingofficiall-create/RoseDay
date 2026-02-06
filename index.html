@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+\<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -38,7 +38,6 @@ body {
     font-size: 10px;
     animation: sparkle 1s linear infinite;
 }
-
 @keyframes sparkle {
     50% { opacity: 0; transform: scale(1.5); }
 }
@@ -58,7 +57,6 @@ body {
     box-shadow: 0 0 30px rgba(255,0,80,0.6);
     animation: zoom 2s ease;
 }
-
 @keyframes zoom {
     from { transform: translate(-50%, -70%) scale(0.5); opacity: 0; }
     to { transform: translate(-50%, -50%) scale(1); opacity: 1; }
@@ -71,7 +69,6 @@ body {
     width: 0;
     animation: typing 4s steps(40, end) forwards, blink .7s infinite;
 }
-
 @keyframes typing { to { width: 100%; } }
 @keyframes blink { 50% { border-color: transparent; } }
 
@@ -89,16 +86,51 @@ button:hover {
     transform: scale(1.1);
     box-shadow: 0 0 20px #ff004c;
 }
+
+/* 💖 Slideshow Images */
+.love-img {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 20px;
+    box-shadow: 0 0 20px #ff4da6;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) scale(0.5);
+    opacity: 0;
+    transition: 0.8s;
+}
+
+/* 🖼️ Side Images (hidden initially) */
+.side-img {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 180px;
+    height: 240px;
+    object-fit: cover;
+    border-radius: 15px;
+    box-shadow: 0 0 20px #ff4da6;
+    z-index: 5;
+    display: none;
+}
+.left-img { left: 15px; }
+.right-img { right: 15px; }
+
 </style>
 </head>
 
 <body>
 
+<!-- 🖼️ Side Images -->
+<img src="hug.jpg" class="side-img left-img" id="leftImg">
+<img src="kiss.jpg" class="side-img right-img" id="rightImg">
+
 <!-- 🌹 Falling Roses + 😘 Kiss -->
 <script>
 for (let i = 0; i < 30; i++) {
 
-    // 🌹 Rose
     let rose = document.createElement("div");
     rose.className = "rose";
     rose.innerHTML = "🌹";
@@ -107,7 +139,6 @@ for (let i = 0; i < 30; i++) {
     rose.style.animationDuration = (3 + Math.random() * 5) + "s";
     document.body.appendChild(rose);
 
-    // 😘 Kiss with glow
     let kiss = document.createElement("div");
     kiss.className = "rose kiss";
     kiss.innerHTML = "😘";
@@ -131,33 +162,30 @@ setInterval(() => {
 },200);
 </script>
 
-<!-- Card -->
 <div class="card">
     <h1>🌹 Happy Rose Day <span id="name">Meri Sherni Ji</span> ❤️</h1>
     <div class="typing">Tum Meri Life ka Sabse Khubsurat Hisaa ho aur hamesha rahogi ... I Love You Always Meri Jaan 💖</div>
-    <button onclick="love()">Yaha Pe click kro  💌</button>
+    <button onclick="love()">Yaha Pe click kro 💌</button>
 </div>
 
-<!-- 🎵 YOUR SONG -->
 <audio id="bgMusic" loop preload="auto">
   <source src="song.mp3" type="audio/mp3">
 </audio>
 
 <script>
-/* GF NAME */
-let gfName = prompt("Meri Jaan Yaha Pe Sherni Ji Type kro naa  ❤️");
+
+let gfName = prompt("Meri Jaan Yaha Pe Sherni Ji Type kro naa ❤️");
 if(gfName){
     document.getElementById("name").innerText = gfName;
 }
 
-/* MUSIC START ON FIRST CLICK */
 document.body.addEventListener("click", function() {
     document.getElementById("bgMusic").play();
 }, { once: true });
 
-/* HEART BURST */
 function love() {
-    alert("I Love You Meri Jaan ❤️🌹Muze ek Kissy aur Hugged do naa💖");
+
+    alert("I Love You Meri Jaan ❤️🌹 Muze ek Kissy aur Hugged do naa 💖");
 
     for (let i = 0; i < 20; i++) {
         let heart = document.createElement("div");
@@ -177,7 +205,47 @@ function love() {
 
         setTimeout(() => heart.remove(), 1000);
     }
+
+    showImages();
 }
+
+/* 💖 IMAGE SLIDESHOW */
+function showImages() {
+
+    const images = [
+        "hug.jpg",
+        "kiss.jpg",
+    ];
+
+    images.forEach((src, index) => {
+        setTimeout(() => {
+
+            let img = document.createElement("img");
+            img.src = src;
+            img.className = "love-img";
+            document.body.appendChild(img);
+
+            setTimeout(() => {
+                img.style.opacity = "1";
+                img.style.transform = "translate(-50%, -50%) scale(1)";
+            }, 50);
+
+            setTimeout(() => {
+                img.style.opacity = "0";
+                img.style.transform = "translate(-50%, -50%) scale(0.5)";
+            }, 2000);
+
+            setTimeout(() => img.remove(), 2600);
+
+        }, index * 1000);
+    });
+
+    setTimeout(() => {
+        document.getElementById("leftImg").style.display = "block";
+        document.getElementById("rightImg").style.display = "block";
+    }, images.length * 1000 + 2500);
+}
+
 </script>
 
 </body>
