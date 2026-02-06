@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Rose Day ❤️</title>
+
+<style>
+body {
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+    background: radial-gradient(circle, #ff4e50, #1a001a);
+}
+
+/* Falling Roses & Kiss */
+.rose {
+    position: absolute;
+    top: -50px;
+    font-size: 50px;
+    animation: fall linear infinite;
+}
+
+/* 😘 Glow effect */
+.kiss {
+    text-shadow: 0 0 10px #ff4da6, 0 0 20px #ff4da6, 0 0 30px #ff1a75;
+}
+
+@keyframes fall {
+    to { transform: translateY(110vh); }
+}
+
+/* Sparkles */
+.spark {
+    position: absolute;
+    color: #fff;
+    font-size: 10px;
+    animation: sparkle 1s linear infinite;
+}
+
+@keyframes sparkle {
+    50% { opacity: 0; transform: scale(1.5); }
+}
+
+/* Card */
+.card {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(12px);
+    padding: 40px;
+    border-radius: 20px;
+    text-align: center;
+    color: white;
+    box-shadow: 0 0 30px rgba(255,0,80,0.6);
+    animation: zoom 2s ease;
+}
+
+@keyframes zoom {
+    from { transform: translate(-50%, -70%) scale(0.5); opacity: 0; }
+    to { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+}
+
+.typing {
+    border-right: 2px solid white;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 0;
+    animation: typing 4s steps(40, end) forwards, blink .7s infinite;
+}
+
+@keyframes typing { to { width: 100%; } }
+@keyframes blink { 50% { border-color: transparent; } }
+
+button {
+    margin-top: 20px;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 25px;
+    background: linear-gradient(45deg,#ff004c,#ff7a00);
+    color: white;
+    cursor: pointer;
+    transition: .3s;
+}
+button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px #ff004c;
+}
+</style>
+</head>
+
+<body>
+
+<!-- 🌹 Falling Roses + 😘 Kiss -->
+<script>
+for (let i = 0; i < 30; i++) {
+
+    // 🌹 Rose
+    let rose = document.createElement("div");
+    rose.className = "rose";
+    rose.innerHTML = "🌹";
+    rose.style.left = Math.random() * 100 + "vw";
+    rose.style.fontSize = (35 + Math.random() * 25) + "px";
+    rose.style.animationDuration = (3 + Math.random() * 5) + "s";
+    document.body.appendChild(rose);
+
+    // 😘 Kiss with glow
+    let kiss = document.createElement("div");
+    kiss.className = "rose kiss";
+    kiss.innerHTML = "😘";
+    kiss.style.left = Math.random() * 100 + "vw";
+    kiss.style.fontSize = (35 + Math.random() * 25) + "px";
+    kiss.style.animationDuration = (3 + Math.random() * 5) + "s";
+    document.body.appendChild(kiss);
+}
+</script>
+
+<!-- Sparkles -->
+<script>
+setInterval(() => {
+    let spark = document.createElement("div");
+    spark.className = "spark";
+    spark.innerHTML = "✨";
+    spark.style.left = Math.random() * 100 + "vw";
+    spark.style.top = Math.random() * 100 + "vh";
+    document.body.appendChild(spark);
+    setTimeout(()=> spark.remove(),1000);
+},200);
+</script>
+
+<!-- Card -->
+<div class="card">
+    <h1>🌹 Happy Rose Day <span id="name">Meri Sherni Ji</span> ❤️</h1>
+    <div class="typing">Tum Meri Life ka Sabse Khubsurat Hisaa ho aur hamesha rahogi ... I Love You Always Meri Jaan 💖</div>
+    <button onclick="love()">Yaha Pe click kro  💌</button>
+</div>
+
+<!-- 🎵 YOUR SONG -->
+<audio id="bgMusic" loop preload="auto">
+  <source src="song.mp3" type="audio/mp3">
+</audio>
+
+<script>
+/* GF NAME */
+let gfName = prompt("Meri Jaan Yaha Pe Sherni Ji Type kro naa  ❤️");
+if(gfName){
+    document.getElementById("name").innerText = gfName;
+}
+
+/* MUSIC START ON FIRST CLICK */
+document.body.addEventListener("click", function() {
+    document.getElementById("bgMusic").play();
+}, { once: true });
+
+/* HEART BURST */
+function love() {
+    alert("I Love You Meri Jaan ❤️🌹Muze ek Kissy aur Hugged do naa💖");
+
+    for (let i = 0; i < 20; i++) {
+        let heart = document.createElement("div");
+        heart.innerHTML = "❤️";
+        heart.style.position = "absolute";
+        heart.style.left = "50%";
+        heart.style.top = "50%";
+        heart.style.fontSize = "50px";
+        heart.style.transition = "1s";
+        document.body.appendChild(heart);
+
+        setTimeout(() => {
+            heart.style.left = (50 + (Math.random()*40-20)) + "%";
+            heart.style.top = (50 + (Math.random()*40-20)) + "%";
+            heart.style.opacity = "0";
+        }, 10);
+
+        setTimeout(() => heart.remove(), 1000);
+    }
+}
+</script>
+
+</body>
+</html>
